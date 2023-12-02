@@ -1,3 +1,4 @@
+import os
 import box
 import yaml
 
@@ -16,6 +17,7 @@ from langchain.chains import (
 from langchain.llms import LlamaCpp
 from langchain.llms import CTransformers
 from langchain.llms import Clarifai
+
 # from langchain.llms.huggingface_pipeline import HuggingFacePipeline
 
 app = FastAPI(
@@ -23,10 +25,13 @@ app = FastAPI(
 )
 
 from backend import routes
+
 # from backend.retriever import EmbeddingModel
 
 
 try:
+    os.environ["SENTENCE_TRANSFORMERS_HOME"] = "StudybotAPI/backend/.cache"
+
     with open("config.yml", "r", encoding="utf8") as ymlfile:
         cfg = box.Box(yaml.safe_load(ymlfile))
     emb = Embeddings(cfg)
