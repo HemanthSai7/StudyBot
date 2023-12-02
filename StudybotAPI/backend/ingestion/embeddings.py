@@ -1,5 +1,5 @@
 from langchain.vectorstores import Qdrant
-from langchain.embeddings import HuggingFaceBgeEmbeddings
+from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 import shutil
@@ -21,7 +21,7 @@ class Embeddings:
         return docs
 
     def store_embeddings(self, docs):
-        embeddings = HuggingFaceBgeEmbeddings(
+        embeddings = HuggingFaceEmbeddings(
             model_name=self.cfg.EMBEDDINGS,
             model_kwargs={"device": self.cfg.DEVICE},
             encode_kwargs={"normalize_embeddings": self.cfg.NORMALIZE_EMBEDDINGS},

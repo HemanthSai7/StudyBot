@@ -9,7 +9,7 @@ qdrant-client
 torch
 transformers
 ctransformers
-sentence_transformers
+# sentence_transformers
 clarifai
 Pillow
 tiktoken
