@@ -3,8 +3,9 @@ CHUNK_OVERLAP: 100
 NUM_RESULTS: 3
 DATA_PATH: "./data"
 EMBEDDINGS: "BAAI/llm-embedder"
-VECTOR_DB: "studybot/vectorstore/studybotstore"
+VECTOR_DB: "./vectorstore/studybotstore"
 NORMALIZE_EMBEDDINGS: True
 COLLECTION_NAME: "studybotstore"
 DEVICE: "cuda:0"
 VECTOR_SPACE: "cosine"
+CACHE_FOLDER: "backend/.cache"
