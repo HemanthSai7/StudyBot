@@ -29,7 +29,7 @@ from backend import routes
 
 
 try:
-    os.environ["TRANSFORMERS_CACHE"] = "backend/.cache"
+    os.environ["SENTENCE_TRANSFORMERS_CACHE"] = "/.cache"
 
     with open("config.yml", "r", encoding="utf8") as ymlfile:
         cfg = box.Box(yaml.safe_load(ymlfile))
