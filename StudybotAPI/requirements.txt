@@ -1,0 +1,11 @@
+langchain
+transformers
+torch
+pypdf
+pydantic==1.10.2
+ctransformers
+fastapi==0.99.1
+sentence_transformers
+pypdf
+python-box
+qdrant-client
