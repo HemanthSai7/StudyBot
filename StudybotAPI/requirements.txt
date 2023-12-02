@@ -12,3 +12,4 @@ ctransformers
 sentence_transformers
 clarifai
 Pillow
+tiktoken
