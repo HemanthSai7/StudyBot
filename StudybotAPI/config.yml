@@ -8,4 +8,4 @@ NORMALIZE_EMBEDDINGS: True
 COLLECTION_NAME: "studybotstore"
 DEVICE: "cuda:0"
 VECTOR_SPACE: "cosine"
-CACHE_FOLDER: "/.cache"
+CACHE_FOLDER: "./models"
