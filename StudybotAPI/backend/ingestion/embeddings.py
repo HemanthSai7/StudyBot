@@ -24,8 +24,8 @@ class Embeddings:
         embeddings = HuggingFaceBgeEmbeddings(
             model_name=self.cfg.EMBEDDINGS,
             model_kwargs={"device": self.cfg.DEVICE},
-            encode_kwargs={"normalize_embeddings": self.cfg.NORMALIZE_EMBEDDINGS},
-            cache_folder = self.cfg.CACHE_FOLDER
+            encode_kwargs={"normalize_embeddings": self.cfg.NORMALIZE_EMBEDDINGS}
+            # cache_folder = self.cfg.CACHE_FOLDER
         )
 
         shutil.rmtree(self.cfg.VECTOR_DB, ignore_errors=True)
