@@ -4,7 +4,7 @@ COPY ./StudybotAPI .
 
 WORKDIR /
 
-RUN MKDIR /.cache
+RUN mkdir /.cache
 
 RUN pip install --no-cache-dir --upgrade -r /requirements.txt
 
