@@ -4,7 +4,7 @@ COPY ./StudybotAPI .
 
 WORKDIR /
 
-RUN mkdir /.cache/torch
+RUN mkdir /.cache
 
 RUN pip install --no-cache-dir --upgrade -r /requirements.txt
 
