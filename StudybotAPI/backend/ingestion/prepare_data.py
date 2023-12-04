@@ -36,9 +36,10 @@ class PDFDataLoader(DataLoader):
     @make_texts_tokenisation_safe
     def lazy_load(self) -> Iterator[Document]:
         try:
-            document = DirectoryLoader(
-                self.data_dir, glob="*.pdf", loader_cls=PyPDFLoader
-            ).load()
+            # document = DirectoryLoader(
+            #     self.data_dir, glob="*.pdf", loader_cls=PyPDFLoader
+            # ).load()
+            document = PyPDFLoader(self.data_dir).load()
             for doc in document:
                 doc.metadata["file_type"] = os.path.splitext(doc.metadata["source"])[-1]
             return document

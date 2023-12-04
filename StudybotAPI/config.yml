@@ -1,7 +1,6 @@
 CHUNK_SIZE: 1000
 CHUNK_OVERLAP: 100
 NUM_RESULTS: 3
-DATA_PATH: "./data"
 EMBEDDINGS: "BAAI/llm-embedder"
 VECTOR_DB: "./vectorstore/studybotstore"
 NORMALIZE_EMBEDDINGS: True
