@@ -16,7 +16,7 @@ def llm_chain_loader(DATA_PATH: str):
     docs = PDFDataLoader(DATA_PATH).load()
     db = app.state.emb.store_embeddings(docs)
 
-    with open("backend/prompt.txt", "r", encoding="utf8") as f:
+    with open("backend/utils/prompt.txt", "r", encoding="utf8") as f:
         prompt = f.read()
 
     prompt = PromptTemplate(template=prompt, input_variables=["context", "question"])

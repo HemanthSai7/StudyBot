@@ -1,4 +1,8 @@
 import os
+import shutil
+from pathlib import Path
+from typing import Callable
+from tempfile import NamedTemporaryFile
 
 from fastapi import Request, BackgroundTasks
 from fastapi import UploadFile
@@ -27,17 +31,19 @@ def api_home():
 @app.post("/api/upload", summary="Upload", tags=["Resource Server"])
 def upload_data(bg_tasks: BackgroundTasks, file: UploadFile = File(...)):
     try:
-        contents = file.file.read()
-        with open(file.filename, "wb") as f:
-            f.write(contents)
+        suffix = Path(file.filename).suffix
+        with NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
+            shutil.copyfileobj(file.file, tmp)
+            tmp_path = os.path.join(os.getcwd(), tmp.name)
     except Exception as e:
         return e
     finally:
         file.file.close()
 
-    path = os.path.join(os.getcwd(), file.filename)
+    # path = os.path.join(os.getcwd(), file.filename)
 
-    bg_tasks.add_task(llm_chain_loader, DATA_PATH=path)
+    bg_tasks.add_task(llm_chain_loader, DATA_PATH=tmp_path)
+
 
 @app.post(
     "/api/inference",
@@ -46,10 +52,7 @@ def upload_data(bg_tasks: BackgroundTasks, file: UploadFile = File(...)):
     tags=["Resource Server"],
 )
 def inference(data: Chat):
-    response_result = {
-        "message": "success", 
-        "result": {}
-    }
+    response_result = {"message": "success", "result": {}}
 
     ops_inference(response_result, data.promptMessage)
     return response_result
