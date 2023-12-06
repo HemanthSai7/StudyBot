@@ -5,7 +5,7 @@ USER user
 ENV HOME=/home/user \
     PATH=/home/user/.local/bin:$PATH
 
-COPY --chown=user ./StudybotAPI .
+COPY --chown=user ./StudybotAPI $HOME/StudybotAPI
 
 WORKDIR $HOME/StudybotAPI
 
