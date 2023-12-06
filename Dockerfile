@@ -7,7 +7,7 @@ ENV HOME=/home/user \
 
 COPY --chown=user ./StudybotAPI .
 
-WORKDIR $HOME/
+WORKDIR $HOME/StudybotAPI
 
 RUN mkdir $HOME/.cache
 
