@@ -41,7 +41,6 @@ def upload_data(bg_tasks: BackgroundTasks, file: UploadFile = File(...)):
         file.file.close()
 
     # path = os.path.join(os.getcwd(), file.filename)
-
     bg_tasks.add_task(llm_chain_loader, DATA_PATH=tmp_path)
 
 
