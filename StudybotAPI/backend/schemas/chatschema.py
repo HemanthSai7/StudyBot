@@ -3,7 +3,7 @@ from fastapi import File, UploadFile
 
 
 class Inference(BaseModel):
-    result: str
+    answer: str
     source_documents: list
 
 class Chat(BaseModel):
