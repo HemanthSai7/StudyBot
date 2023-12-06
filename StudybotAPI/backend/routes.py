@@ -45,14 +45,12 @@ def upload_data(bg_tasks: BackgroundTasks, file: UploadFile = File(...)):
     bg_tasks.add_task(llm_chain_loader, DATA_PATH=tmp_path)
 
 
-@app.post(
-    "/api/inference",
-    summary="Inference",
-    response_model=FrontendResponseModel,
-    tags=["Resource Server"],
-)
+@app.post("/api/inference",summary="Inference",response_model=FrontendResponseModel,tags=["Resource Server"])
 def inference(data: Chat):
-    response_result = {"message": "success", "result": {}}
+    response_result = {
+        "message": "success", 
+        "result": {}
+    }
 
     ops_inference(response_result, data.promptMessage)
     return response_result
