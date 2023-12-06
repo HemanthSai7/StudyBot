@@ -1,10 +1,15 @@
 FROM python:3.10.9
 
-COPY ./StudybotAPI .
+RUN useradd -m -u 1000 user
+USER user
+ENV HOME=/home/user \
+    PATH=/home/user/.local/bin:$PATH
 
-WORKDIR /
+COPY --chown=user ./StudybotAPI .
 
-# RUN mkdir /.cache
+WORKDIR $HOME/
+
+RUN mkdir /.cache
 
 RUN pip install --no-cache-dir --upgrade -r /requirements.txt
 
