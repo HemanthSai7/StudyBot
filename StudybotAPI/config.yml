@@ -5,6 +5,6 @@ EMBEDDINGS: "BAAI/llm-embedder"
 VECTOR_DB: "./vectorstore/studybotstore"
 NORMALIZE_EMBEDDINGS: True
 COLLECTION_NAME: "studybotstore"
-DEVICE: "cuda:0"
+DEVICE: "cpu"
 VECTOR_SPACE: "cosine"
 CACHE_FOLDER: "./cache"
