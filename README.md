@@ -37,12 +37,12 @@ When studying a theoretical subject, which has a lot of concepts, dates, importa
 Input the prompt in the text box and press enter. The bot will give you the answer. If you want to ask another question, just enter the question and the bot will try to answer.
 
 ## Screenshots
-![image](textbase/assets/ss1.png)
-![image](textbase/assets/ss2.png)
-![image](textbase/assets/ss3.png)
+![image](StudybotAPI/assets/ss1.png)
+![image](StudybotAPI/assets/ss2.png)
+![image](StudybotAPI/assets/ss3.png)
 
 ## How it works
-![image](textbase/assets/flowchart.png)
+![image](StudybotAPI/assets/flowchart.png)
 
 ## Tech Stack
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
