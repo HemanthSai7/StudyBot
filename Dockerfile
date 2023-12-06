@@ -9,7 +9,7 @@ COPY --chown=user ./StudybotAPI .
 
 WORKDIR $HOME/
 
-RUN mkdir /.cache
+RUN --chown=mkdir /.cache
 
 RUN pip install --no-cache-dir --upgrade -r /requirements.txt
 
