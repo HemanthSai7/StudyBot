@@ -6,14 +6,10 @@ from fastapi import FastAPI
 
 from backend.ingestion import *
 
-from langchain.llms import LlamaCpp
-from langchain.llms import CTransformers
 # from langchain.llms.huggingface_pipeline import HuggingFacePipeline
 
 
-app = FastAPI(
-    title="StudyBot API", version="0.1.0", description="API for StudyBot Project"
-)
+app = FastAPI(title="StudyBot API", version="0.1.0", description="API for StudyBot Project")
 
 from backend import routes
 # from backend.retriever import EmbeddingModel
