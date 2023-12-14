@@ -1,0 +1,14 @@
+{
+  "home": {
+    "page_title": "Studybot",
+    "layout": "wide",
+    "page_icon": "🏡",
+    "initial_sidebar_state": "expanded"
+  },
+  "bot": {
+    "page_title": "Chatbot",
+    "layout": "wide",
+    "page_icon": "💻",
+    "initial_sidebar_state": "expanded"
+  }
+}

@@ -1,0 +1,15 @@
+fastapi==0.99.1
+uvicorn
+requests
+langchain==0.0.346
+pydantic==1.10.2
+pypdf
+python-box
+qdrant-client
+torch
+transformers
+sentence_transformers
+clarifai
+Pillow
+tiktoken
+python-multipart

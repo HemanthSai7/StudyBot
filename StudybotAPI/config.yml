@@ -1,0 +1,10 @@
+CHUNK_SIZE: 1000
+CHUNK_OVERLAP: 100
+NUM_RESULTS: 3
+EMBEDDINGS: "BAAI/llm-embedder"
+VECTOR_DB: "./vectorstore/studybotstore"
+NORMALIZE_EMBEDDINGS: True
+COLLECTION_NAME: "studybotstore"
+DEVICE: "cpu"
+VECTOR_SPACE: "cosine"
+CACHE_FOLDER: "./cache"
