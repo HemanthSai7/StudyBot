@@ -59,7 +59,7 @@ def home():
     st.divider()
     # architecture heading in the middle
     st.markdown("<h2 style='text-align: center; color: black;'>Studybot Architecture</h1>", unsafe_allow_html=True)
-    st.image("images/architecture.png")
+    st.image("frontend/images/architecture.png")
 
 
 home()
