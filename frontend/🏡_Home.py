@@ -20,14 +20,15 @@ def home():
         unsafe_allow_html=True,
     )
 
-    with st.expander("How does it work?", expanded=True):
-        st.markdown(
+    with st.expander("How does it work? ⚙️", expanded=True):
+        st.info(
             """
             - When you upload a document, it will be divided into smaller chunks and stored in a special type of database called a vector index that allows for semantic search and retrieval. I'm using Qdrant vector database for this purpose.
 
             - When you ask a question, Studybot will search through the document chunks and find the most relevant ones using the vector index. Then, it will use Mistral-7B-instruct to generate a final answer.
 
-            """
+            """,
+            icon="ℹ️",
         )
 
     with st.expander("FAQs 🤔"):
@@ -55,11 +56,14 @@ def home():
             """,
             unsafe_allow_html=True,
         )
-    
+
     st.divider()
     # architecture heading in the middle
-    st.markdown("<h2 style='text-align: center; color: black;'>Studybot Architecture</h1>", unsafe_allow_html=True)
-    st.image("frontend/images/architecture.png")
+    st.markdown(
+        "<h2 style='text-align: center; color: black;'>Studybot Architecture</h1>",
+        unsafe_allow_html=True,
+    )
+    st.image("images/architecture.png")
 
 
 home()
