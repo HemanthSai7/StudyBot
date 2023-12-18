@@ -13,4 +13,4 @@ clarifai
 Pillow
 tiktoken
 python-multipart
-urllib3==1.25.11
+urllib3==1.26.18
