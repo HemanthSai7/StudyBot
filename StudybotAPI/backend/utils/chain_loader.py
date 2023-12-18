@@ -44,7 +44,8 @@ async def llm_chain_loader(DATA_PATH: str):
     qa_chain = ConversationalRetrievalChain.from_llm(
         llm=llm,
         chain_type="stuff",
-        retriever=db.as_retriever(search_type="similarity", search_kwargs={"k": 2}),
+        retriever=db.as_retriever(
+            search_type="mmr", search_kwargs={"k": 2, "fetch_k": 4}),
         # return_source_documents=True,
         # chain_type_kwargs={"prompt": prompt},
         condense_question_prompt=prompt,

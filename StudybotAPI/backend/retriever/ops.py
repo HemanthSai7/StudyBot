@@ -22,4 +22,5 @@ def ops_inference(response_result: FrontendResponseModel, question: str):
     except Exception as e:
         response_result["status"] = "error"
         response_result["message"].append(str(e))
+        print(response_result)
         raise ModelDeploymentException(response_result)

@@ -1,4 +1,5 @@
-from langchain.vectorstores import Qdrant
+# from langchain.vectorstores import Qdrant
+from langchain.vectorstores import DocArrayInMemorySearch
 from langchain.embeddings import HuggingFaceBgeEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
@@ -32,17 +33,11 @@ class Embeddings:
 
         texts = self.split_docs(docs)
 
-        vector_store = Qdrant.from_documents(
-            texts,
-            embeddings,
-            # path=self.cfg.VECTOR_DB,
-            location=":memory:",
-            # host="localhost",
-            # prefer_grpc=True,
-            collection_name=self.cfg.VECTOR_DB,
+        vector_store = DocArrayInMemorySearch.from_documents(
+            texts, embeddings
         )
 
-        print(f"Vector store created at {self.cfg.VECTOR_DB}")
+        print(f"Vector store created.")
 
         return vector_store
 

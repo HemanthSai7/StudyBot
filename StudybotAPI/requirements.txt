@@ -5,7 +5,7 @@ langchain==0.0.346
 pydantic==1.10.2
 pypdf
 python-box
-qdrant-client
+# qdrant-client
 torch
 transformers
 sentence_transformers
@@ -13,4 +13,5 @@ clarifai
 Pillow
 tiktoken
 python-multipart
-urllib3==1.25.11
+# urllib3==1.25.11
+docarray

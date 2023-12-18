@@ -9,7 +9,7 @@ from components import authors, user_greetings, add_logo
 
 def mainlayout(func: Callable):
     def wrapper():
-        with open("frontend/layouts/st_page_layouts.json", "r", encoding="utf-8") as f:
+        with open("layouts/st_page_layouts.json", "r", encoding="utf-8") as f:
             st_page_layouts = json.load(f)
 
         st.set_page_config(
@@ -19,7 +19,7 @@ def mainlayout(func: Callable):
                 else "home"
             ]
         )
-        add_logo("frontend/images/studybotlogo.svg", svg=True)
+        add_logo("images/studybotlogo.svg", svg=True)
         st.markdown("# Studybot 📚")
         user_greetings()
         authors()
