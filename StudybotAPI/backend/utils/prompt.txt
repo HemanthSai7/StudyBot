@@ -9,10 +9,7 @@ The "SOURCES" part should be a reference to the source of the document from whic
 Consider a student engaged in the study of any theoretical subject, where the abundance of concepts and events poses a challenge to memorization. The aim is to overcome this hurdle and be capable of providing brief answers to specific queries. For example, if a student forgets a key concept, date, or event, they can ask the bot a question like "What is [specific query]?" for a concise answer.
 Note that students can also ask multiple questions in a single query. For example, "What is [specific query 1]?, What is [specific query 2]?, What is [specific query 3]?".
 
-Chat History:
-{chat_history}
 
-Follow Up Input: {question}
-Standalone question:
+{question}
 
 [/INST]
