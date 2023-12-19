@@ -3,113 +3,58 @@ import requests
 import streamlit as st
 
 from layouts.mainlayout import mainlayout
+from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
+
+from components.file_streaming import *
+
 
 @mainlayout
-def upload_data():
-    # upload pdf
-    upload_pdf = st.file_uploader("Upload PDF", type="pdf")
-    if upload_pdf is not None:
-        files = {"file": upload_pdf}
-        with st.spinner("Uploading PDF..."):
-            response = requests.post(
-                "https://hemanthsai7-studybotapi.hf.space/api/upload", files=files
-            )
+def display():
+    with st.expander("What happens when I upload a PDF? 📑", expanded=True):
+        st.info(
+            """
+            - The PDF is uploaded to the backend server. ⚙️
 
-            if response.status_code == 200:
-                st.success(
-                    f'{response.json()["message"][0]}. Vector Store created successfully!'
-                )
-                st.session_state.uploaded_pdf=True
-            else:
-                st.error("Failed to upload PDF!")
+            - The PDF is converted into small chunks for  faster processing. 🚀
+            
+            - The chunks are broken down into tokens. A token is a single word or a group of words. 📝
 
-        
+            - The tokens are converted into embedding vectors. 📊
 
-upload_data()
+            - The embedding vectors are stored in a vector store. 🗄️
+            """,
+            icon="ℹ️",
+        )
 
-with st.expander("What happens when I upload a PDF? 📑", expanded=True):
-    st.info(
-        """
-        - The PDF is uploaded to the backend server. ⚙️
-
-        - The PDF is converted into small chunks for  faster processing. 🚀
-           
-        - The chunks are broken down into tokens. A token is a single word or a group of words. 📝
-
-        - The tokens are converted into embedding vectors. 📊
-
-        - The embedding vectors are stored in a vector store. 🗄️
-        """,
-        icon="ℹ️",
-    )
-
-st.divider()
-
-if "uploaded_pdf" in st.session_state.keys():
-    # chatbot
-    st.subheader("Ask Studybot a question! 🤖")
+    st.divider()
 
 
-    if "messages" not in st.session_state.keys():
-        st.session_state.messages = [
-            {
-                "role": "assistant",
-                "content": "What's troubling you? Ask me a question right away!",
-            }
-        ]
+display()
 
-    # Display or clear chat messages
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.write(message["content"])
+uploaded_files = st.sidebar.file_uploader(label="Upload PDF files", type=["pdf"])
 
+if not uploaded_files:
+    st.info("Please upload PDF documents to continue.")
+    st.stop()
+upload_data(uploaded_files)
 
-    def clear_chat_history():
-        st.session_state.messages = [
-            {
-                "role": "assistant",
-                "content": "What's troubling you? Ask me a question right away!",
-            }
-        ]
+msgs = StreamlitChatMessageHistory()
 
+if len(msgs.messages) == 0 or st.sidebar.button("Clear message history"):
+    msgs.clear()
+    msgs.add_ai_message("How can I help you?")
 
-    st.sidebar.button("Clear Chat History", on_click=clear_chat_history)
+avatars = {"human": "user", "ai": "assistant"}
+for msg in msgs.messages:
+    st.chat_message(avatars[msg.type]).write(msg.content)
 
+if user_query := st.chat_input(placeholder="Ask me anything!"):
+    st.chat_message("user").write(user_query)
 
-    def generate_mistral_response(question: str):
-        for dict_message in st.session_state.messages:
-            if dict_message["role"] == "user":
-                question = dict_message["content"]
-
-        answer = requests.post(
-            "https://hemanthsai7-studybotapi.hf.space/api/inference",
-            json={"promptMessage": question},
+    with st.chat_message("assistant"):
+        retrieval_handler = PrintRetrievalHandler(st.container())
+        stream_handler = StreamHandler(st.empty())
+        response = requests.post(
+            "http://127.0.0.1:8000/api/inference",
+            json={"promptMessage": user_query},
         ).json()
-
-        return answer
-
-
-    # User-provided prompt
-    if prompt := st.chat_input(
-        disabled=not st.session_state.messages[-1]["role"] == "assistant",
-        placeholder="Hello, please ask me a question! 🤖"):
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        with st.chat_message("user"):
-            st.write(prompt)
-
-    # ask question
-    st.write(st.session_state)
-
-    # Generate a new response if last message is not from assistant
-    if st.session_state.messages[-1]["role"] != "assistant":
-        with st.chat_message("assistant"):
-            with st.spinner("Thinking..."):
-                response = generate_mistral_response(prompt)
-                placeholder = st.empty()
-                full_response = ""
-                for item in response:
-                    full_response += item
-                    placeholder.markdown(full_response)
-                placeholder.markdown(full_response)
-        message = {"role": "assistant", "content": full_response}
-        st.session_state.messages.append(message)
