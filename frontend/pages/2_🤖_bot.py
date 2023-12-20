@@ -81,7 +81,7 @@ def generate_mistral_response(question: str):
 
         answer = response["result"]["answer"]
 
-        with st.expander("Source documents 🧐", expanded=True):
+        with st.expander("Source documents 🧐"):
             source_documents = response["result"]["source_documents"]
             display_source_document(source_documents)
 
@@ -102,7 +102,7 @@ if prompt := st.chat_input(
         st.write(prompt)
 
 # ask question
-st.write(st.session_state)
+# st.write(st.session_state)
 
 # Generate a new response if last message is not from assistant
 if st.session_state.messages[-1]["role"] != "assistant":
