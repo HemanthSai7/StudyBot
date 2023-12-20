@@ -3,7 +3,6 @@ import requests
 import streamlit as st
 
 from layouts.mainlayout import mainlayout
-from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
 
 from components.file_streaming import *
 from components.display import *
@@ -32,13 +31,13 @@ def display():
 
 display()
 
-BASE_URL = "http://127.0.0.1:8000"
+BASE_URL = "https://hemanthsai7-studybotapi.hf.space"
 uploaded_files = st.sidebar.file_uploader(label="Upload PDF files", type=["pdf"])
 
 if not uploaded_files:
     st.info("Please upload PDF documents to continue.")
     st.stop()
-upload_data(uploaded_files)
+upload_data(uploaded_files, BASE_URL)
 
 
 if "messages" not in st.session_state.keys():
@@ -83,18 +82,14 @@ def generate_mistral_response(question: str):
 
         answer = response["result"]["answer"]
 
+        with st.expander("Source documents 🧐", expanded=True):
+            source_documents = response["result"]["source_documents"]
+            display_source_document(source_documents)
+
     except Exception as e:
         if response.json()=='exception.ModelDeployingException()':
             st.error("Model is deploying in the backend servers. Please try again after some time")
             st.stop()
-    
-    
-    with st.expander("Source documents 🧐", expanded=True):
-        source_documents = requests.post(
-            f"{BASE_URL}/api/inference",
-            json={"promptMessage": question}).json()["result"]["source_documents"]
-        display_source_document(source_documents)
-
 
     return answer
 

@@ -7,11 +7,11 @@ from langchain.callbacks.base import BaseCallbackHandler
 
 
 @st.cache_resource(ttl="1h")
-def upload_data(uploaded_files):
+def upload_data(uploaded_files, BASE_URL):
     files = {"file": uploaded_files}
     with st.spinner("Uploading PDF..."):
         response = requests.post(
-            "http://127.0.0.1:8000/api/upload", files=files
+            f"{BASE_URL}/api/upload", files=files
         )
 
         if response.status_code == 200:
