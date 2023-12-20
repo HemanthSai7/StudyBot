@@ -2,8 +2,9 @@ import requests
 
 import streamlit as st
 
-from layouts.mainlayout import mainlayout
 from components.display import *
+from layouts.mainlayout import mainlayout
+from components.file_streaming import upload_data
 
 
 @mainlayout
