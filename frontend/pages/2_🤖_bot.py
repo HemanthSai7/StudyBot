@@ -6,6 +6,7 @@ from layouts.mainlayout import mainlayout
 from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
 
 from components.file_streaming import *
+from components.display import *
 
 
 @mainlayout
@@ -31,6 +32,7 @@ def display():
 
 display()
 
+BASE_URL = "http://127.0.0.1:8000"
 uploaded_files = st.sidebar.file_uploader(label="Upload PDF files", type=["pdf"])
 
 if not uploaded_files:
@@ -38,23 +40,86 @@ if not uploaded_files:
     st.stop()
 upload_data(uploaded_files)
 
-msgs = StreamlitChatMessageHistory()
 
-if len(msgs.messages) == 0 or st.sidebar.button("Clear message history"):
-    msgs.clear()
-    msgs.add_ai_message("How can I help you?")
+if "messages" not in st.session_state.keys():
+    st.session_state.messages = [
+        {
+            "role": "assistant",
+            "content": "What's troubling you? Ask me a question right away!",
+        }
+    ]
 
-avatars = {"human": "user", "ai": "assistant"}
-for msg in msgs.messages:
-    st.chat_message(avatars[msg.type]).write(msg.content)
+# Display or clear chat messages
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.write(message["content"])
 
-if user_query := st.chat_input(placeholder="Ask me anything!"):
-    st.chat_message("user").write(user_query)
 
-    with st.chat_message("assistant"):
-        retrieval_handler = PrintRetrievalHandler(st.container())
-        stream_handler = StreamHandler(st.empty())
+def clear_chat_history():
+    st.session_state.messages = [
+        {
+            "role": "assistant",
+            "content": "What's troubling you? Ask me a question right away!",
+        }
+    ]
+
+
+st.sidebar.button("Clear Chat History", on_click=clear_chat_history)
+
+
+def generate_mistral_response(question: str):
+    for dict_message in st.session_state.messages:
+        if dict_message["role"] == "user":
+            question = dict_message["content"]
+    
+    try:
         response = requests.post(
-            "http://127.0.0.1:8000/api/inference",
-            json={"promptMessage": user_query},
-        ).json()
+            f"{BASE_URL}/api/inference",
+        json={"promptMessage": question}).json()
+
+        if response["status"]=="error":
+            st.error("Please refresh the page and try uploading the file again.")
+            st.stop()
+
+        answer = response["result"]["answer"]
+
+    except Exception as e:
+        if response.json()=='exception.ModelDeployingException()':
+            st.error("Model is deploying in the backend servers. Please try again after some time")
+            st.stop()
+    
+    
+    with st.expander("Source documents 🧐", expanded=True):
+        source_documents = requests.post(
+            f"{BASE_URL}/api/inference",
+            json={"promptMessage": question}).json()["result"]["source_documents"]
+        display_source_document(source_documents)
+
+
+    return answer
+
+
+# User-provided prompt
+if prompt := st.chat_input(
+    disabled=not st.session_state.messages[-1]["role"] == "assistant",
+    placeholder="Hello, please ask me a question! 🤖"):
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user"):
+        st.write(prompt)
+
+# ask question
+st.write(st.session_state)
+
+# Generate a new response if last message is not from assistant
+if st.session_state.messages[-1]["role"] != "assistant":
+    with st.chat_message("assistant"):
+        with st.spinner("Thinking..."):
+            response = generate_mistral_response(prompt)
+            placeholder = st.empty()
+            full_response = ""
+            for item in response:
+                full_response += item
+                placeholder.markdown(full_response)
+            placeholder.markdown(full_response)
+    message = {"role": "assistant", "content": full_response}
+    st.session_state.messages.append(message)
