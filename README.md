@@ -11,15 +11,28 @@ pinned: false
 
 ✨ Streamlit is an open-source app framework for Machine Learning and Data Science teams. Create beautiful data apps in hours, not weeks. All in pure Python. ✨
 
-## Installation
+## Motive
+When studying a theoretical subject, which has a lot of concepts, dates, important events etc. No matter how hard we try to memorise them, it's hard to remember them all. So, I thought of making a bot that can help us in quick revision of the subject. For example, if we are studying history, and we forget the event of the 1857 revolt, we can ask the bot like **"What happened in 1857?"** and it will tell us the brief answer. This will help us in quick revision of the subject.
+
+## Backend (FastAPI)
+
+#### Installation
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Start development server
+#### Folder Structure
 
-> If you're using the default template, **remember to set the OpenAI API key** in `main.py`.
+> - `StudybotAPI/backend` contains the backend code for the API.
+> - `StudybotAPI/backend/app.py` contains the FastAPI code for the API.
+> - `StudybotAPI/backend/core` contains the code for configuring environment variables and custom logging.
+> - `StudybotAPI/backend/schema` contains the Pydantic models for the API.
+> - `StudybotAPI/backend/utils` contains the utility functions for the API.
+> - `StudybotAPI/backend/ingestion` contains the code for ingesting data from the database.
+> - `StudybotAPI/backend/retriever` contains the code for retrieval of the answer from the database.
+
+#### Start development server
 
 Run the following command:
 
@@ -27,30 +40,51 @@ Run the following command:
 cd StudybotAPI
 uvicorn app:app --reload
 ```
+Now go to [http://127.0.0.1:8000]([http://127.0.0.1:8000) to access `Swagger UI`.
 
-Now go to [http://localhost:4000](http://localhost:4000) and start chatting with your bot! The bot will automatically reload when you change the code.
+## Frontend (Streamlit)
 
-## Motive
-When studying a theoretical subject, which has a lot of concepts, dates, important events etc. No matter how hard we try to momrize them, its hard to remember them all. So, I thought of making a bot which can help us in quick revision of the subject. For example, if we are studying history, and we forget the event of 1857 revolt, we can ask the bot like **"What happened in 1857?"** and it will tell us brief answer. This will help us in quick revision of the subject.
+#### Installation
+
+```bash
+pip install -r requirements.txt
+```
+
+#### Folder Structure
+> - `frontend/components/*` contains the code for the components of the frontend.
+> - `frontend/images/*` contains the images used in the frontend.
+> - `frontend/🏡_home.py` contains the code for the homepage of the frontend.
+> - `frontend/layouts/*` contains the code for the layouts of the frontend.
+> - `frontend/pages/*` contains the code for the pages of the frontend.
+
+
+#### Start development server
+
+Run the following command:
+
+```bash
+cd frontend
+streamlit run '🏡_home.py'
+```
+
+Now go to [http://localhost:8501](http://localhost:8501) and start chatting with your bot! The bot will automatically reload when you change the code.
+
 
 ## How to use
-Input the prompt in the text box and press enter. The bot will give you the answer. If you want to ask another question, just enter the question and the bot will try to answer.
+Input the question in the text box and press enter. The bot will give you the answer. If you want to ask another question, just enter the question and the bot will try to answer.
 
 ## Screenshots
-![image](StudybotAPI/assets/ss1.png)
-![image](StudybotAPI/assets/ss2.png)
-![image](StudybotAPI/assets/ss3.png)
+![image](assets/Home_Page.png)
+![image](assets/image.png)
+![Alt text](assets/chatbot.png)
 
 ## How it works
-![image](StudybotAPI/assets/flowchart.png)
+![image](assets/flowchart.png)
 
 ## Tech Stack
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
 ![Langchain](https://img.shields.io/badge/langchain-%23E34F26.svg?style=for-the-badge&logo=langchains&logoColor=white)
-![Huggingface](https://img.shields.io/badge/huggingface-%23E34F26.svg?style=for-the-badge&logo=huggingface&logoColor=white)
-![Streamlit](https://img.shields.io/badge/streamlit-%23E34F26.svg?style=for-the-badge&logo=streamlit&logoColor=white)
-![Docker](https://img.shields.io/badge/docker-%23E34F26.svg?style=for-the-badge&logo=docker&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![HuggingFace](https://img.shields.io/badge/Huggingface-E8AD17?style=for-the-badge&logo=huggingface&logoColor=white)
