@@ -1,0 +1,52 @@
+{
+    "os": "Windows-10-10.0.23606-SP0",
+    "python": "3.10.9",
+    "heartbeatAt": "2023-12-21T13:52:34.646908",
+    "startedAt": "2023-12-21T13:52:32.183928",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "<python with no main file>",
+    "codePathLocal": null,
+    "git": {
+        "remote": "https://github.com/HemanthSai7/StudyBot.git",
+        "commit": "68421626effee94953d847452c5781182a842b8c"
+    },
+    "email": "hemanth.sai3187@gmail.com",
+    "root": "E:/Projects/Hackathons/StudyBot",
+    "host": "HemanthSai7",
+    "username": "alfat",
+    "executable": "d:\\Anaconda3\\envs\\pytorchML\\python.exe",
+    "cpu_count": 6,
+    "cpu_count_logical": 12,
+    "cpu_freq": {
+        "current": 2592.0,
+        "min": 0.0,
+        "max": 2592.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2592.0,
+            "min": 0.0,
+            "max": 2592.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 100.74385833740234,
+            "used": 71.01551055908203
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 2060",
+            "memory_total": 6442450944
+        }
+    ],
+    "memory": {
+        "total": 15.76907730102539
+    }
+}
