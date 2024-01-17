@@ -49,7 +49,8 @@ async def upload_data(file: UploadFile = File(...)):
     finally:
         file.file.close()
 
-    await llm_chain_loader(DATA_PATH=tmp_path)
+    vector_store= await data_ingestion(DATA_PATH=tmp_path)
+    llm_chain_loader(vector_store=vector_store)
     return response_result
 
 
@@ -57,7 +58,7 @@ async def upload_data(file: UploadFile = File(...)):
 def inference(data: Chat):
     response_result = {
         "status": "success",
-        "message": [""], 
+        "message": [], 
         "result": {}
     }
 

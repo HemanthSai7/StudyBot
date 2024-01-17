@@ -72,6 +72,10 @@ instance/
 # vector store
 studybot/vectorstore/
 notebooks/wandb/
+wandb/
+vectorstore/
+StudybotAPI/.hemanthsai7/
+artifacts/
 
 # Scrapy stuff:
 .scrapy
