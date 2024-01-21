@@ -63,7 +63,7 @@ def home():
         "<h2 style='text-align: center; color: black;'>Studybot Architecture</h1>",
         unsafe_allow_html=True,
     )
-    st.image("frontend/images/architecture.png")
+    st.image("images/architecture.png")
 
 
 home()

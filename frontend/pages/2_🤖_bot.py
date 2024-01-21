@@ -6,6 +6,7 @@ from components.display import *
 from layouts.mainlayout import mainlayout
 from components.file_streaming import upload_data
 
+from config import default_config
 
 @mainlayout
 def display():
@@ -30,7 +31,7 @@ def display():
 
 display()
 
-BASE_URL = "https://hemanthsai7-studybotapi.hf.space"
+BASE_URL = default_config.BASE_URL
 uploaded_files = st.sidebar.file_uploader(label="Upload PDF files", type=["pdf"])
 
 if not uploaded_files:

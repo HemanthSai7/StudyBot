@@ -6,7 +6,7 @@ import streamlit as st
 from langchain.callbacks.base import BaseCallbackHandler
 
 
-@st.cache_resource(ttl="1h")
+@st.cache_resource(ttl="30m")
 def upload_data(uploaded_files, BASE_URL):
     files = {"file": uploaded_files}
     with st.spinner("Uploading PDF..."):

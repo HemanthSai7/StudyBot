@@ -6,7 +6,9 @@ from langchain.chains import (
     LLMChain,
     SimpleSequentialChain,
     RetrievalQA,
+    MultiRetrievalQAChain,
     ConversationalRetrievalChain,
+    MultiPromptChain
 )
 from langchain.llms import Clarifai
 from langchain.prompts import PromptTemplate
@@ -20,9 +22,7 @@ async def llm_chain_loader(DATA_PATH: str):
     with open("backend/utils/prompt.txt", "r", encoding="utf8") as f:
         prompt = f.read()
 
-    prompt = PromptTemplate(
-        template=prompt, input_variables=["context", "question"]
-    )
+    prompt = PromptTemplate(template=prompt, input_variables=["context", "question"])
 
     llm = Clarifai(
         pat=config.CLARIFAI_PAT,
@@ -36,7 +36,7 @@ async def llm_chain_loader(DATA_PATH: str):
         llm=llm,
         chain_type="stuff",
         retriever=db.as_retriever(
-            search_type="mmr", search_kwargs={"k": 2, "fetch_k": 4}
+            search_type="mmr", search_kwargs={"k": 2, "fetch_k": 4, "top_p": 0.95, "temperature": 0.7}
         ),
         return_source_documents=True,
         chain_type_kwargs={"prompt": prompt},

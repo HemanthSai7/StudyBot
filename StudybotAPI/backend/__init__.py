@@ -1,10 +1,9 @@
 import os
-import box
-import yaml
 
 from fastapi import FastAPI
 
 from backend.ingestion import *
+from cfg import default_config
 
 # from langchain.llms.huggingface_pipeline import HuggingFacePipeline
 
@@ -18,9 +17,8 @@ from backend import routes
 try:
     os.environ["TRANSFORMERS_CACHE"] = "/.cache"
 
-    with open("config.yml", "r", encoding="utf8") as ymlfile:
-        cfg = box.Box(yaml.safe_load(ymlfile))
-    app.state.emb = Embeddings(cfg) 
+
+    app.state.emb = Embeddings(default_config) 
 
     # llm = HuggingFacePipeline(pipeline=EmbeddingModel._initialize_pipeline())
     # llm = LlamaCpp(

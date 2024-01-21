@@ -1,6 +1,6 @@
 # from langchain.vectorstores import Qdrant
-from langchain.vectorstores import DocArrayInMemorySearch
-from langchain.embeddings import HuggingFaceBgeEmbeddings
+from langchain_community.vectorstores import DocArrayInMemorySearch
+from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 import shutil
