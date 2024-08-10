@@ -4,3 +4,8 @@ backgroundColor="#FFFFFF"
 secondaryBackgroundColor="#F0F2F6"
 textColor="#262730"
 font="sans serif"
+
+[server]
+headless = true
+browser.serverAddress = "https://studybot.streamlit.app/"
+browser.serverPort = 8501
