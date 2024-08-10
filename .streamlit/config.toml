@@ -8,7 +8,7 @@ font="sans serif"
 [server]
 headless = true
 enableCORS = true
-enableXsrfProtection = true
+enableXsrfProtection = false
 
 [browser]
 serverAddress = "https://studybot.streamlit.app/"

@@ -100,7 +100,7 @@ if prompt := st.chat_input(
     placeholder="Hello, please ask me a question! 🤖"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
-        st.write_stream(prompt)
+        st.write(prompt)
 
 # ask question
 # st.write(st.session_state)
