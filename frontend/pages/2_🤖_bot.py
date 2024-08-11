@@ -1,5 +1,5 @@
+import time
 import requests
-
 import streamlit as st
 
 from components.display import *
@@ -94,13 +94,18 @@ def generate_mistral_response(question: str):
     return answer
 
 
+def stream_response(prompt):
+    for word in prompt.split(" "):
+        yield word + " "
+        time.sleep(0.02)
+
 # User-provided prompt
 if prompt := st.chat_input(
     disabled=not st.session_state.messages[-1]["role"] == "assistant",
     placeholder="Hello, please ask me a question! 🤖"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
-        st.write(prompt)
+        st.write_stream(stream_response(prompt))
 
 # ask question
 # st.write(st.session_state)

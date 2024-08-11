@@ -1,6 +1,6 @@
 from types import SimpleNamespace
 
-LOCAL_URL = "http://127.0.0.1:8000"
+LOCAL_URL = "http://127.0.0.1:8501"
 PROD_URL = "https://hemanthsai7-studybotapi.hf.space"
 
 default_config = SimpleNamespace(
